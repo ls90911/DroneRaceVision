@@ -1,0 +1,76 @@
+
+figure(2)
+
+for i=1:30
+    if i<10
+        file=['img_0000' num2str(i) '.jpg' ]
+    else
+        file=['img_000' num2str(i) '.jpg' ]
+    end
+    
+    disp(file)
+    img = imread(file);
+    yuv = rgb2ycbcr(img);
+    hsv = rgb2hsv(img);
+    
+%     [h,w,c] = size(img);
+%     
+%     for x=1:h
+%         for y=1:w
+%             
+%             if 1
+%                 R = img(x,y,1);
+%                 G = img(x,y,2);
+%                 B = img(x,y,3);
+% 
+%                 if (yuv(x,y,2) > 132) %& (yuv(x,y,3) > 132)
+%                     R = 255;
+%                     G = 0;
+%                     B = 0;
+%                 end
+% 
+%                 img(x,y,1) = yuv(x,y,i);
+%                 img(x,y,2) = yuv(x,y,i);
+%                 img(x,y,3) = yuv(x,y,i);
+%             end            
+%         end
+%     end
+    
+    YY = yuv(:,:,1);
+    Cr = yuv(:,:,2);
+    Cb = yuv(:,:,3);
+    
+    [dx, dy]  = gradient(double(Cb));
+    
+    dx = dx + 0.5;
+    dx = dx ./ 10.;
+    
+    dy = dy + 0.5;
+    dy = dy ./ 10;
+    
+    
+    subplot(2,3,1);
+    imshow(img)
+    title('RGB')
+    subplot(2,3,2);
+    imshow(dx)
+    title('dx(Cr)')
+    subplot(2,3,3);
+    imshow(dy)
+    title('dy(Cr)')
+    subplot(2,3,4);
+    imshow( (yuv(:,:,3)-128).*2  )
+    title('Cr')
+    subplot(2,3,5);
+    imshow( (yuv(:,:,3)> 13))  )
+    title('S')
+    
+    det =  (hsv(:,:,3) <= 240/256) & (hsv(:,:,3) > 30/256) & (hsv(:,:,2) > 0.20) & ((hsv(:,:,1)<0.10) | (hsv(:,:,1)>0.85));
+    subplot(2,3,6);
+    imshow( det )
+    title('HSV(filter)')
+
+    
+    
+    pause( 5 )
+end

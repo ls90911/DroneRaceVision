@@ -1,0 +1,1 @@
+WEKA-related code in one of my old projects on sky segmentation, where I read J48 trees and saved them to C-code.

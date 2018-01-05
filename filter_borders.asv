@@ -1,0 +1,23 @@
+function [Hor, Ver] = filter_borders(Reponse, border_size)
+% function [Hor, Ver] = filter_borders(Reponse, border_size)
+
+W = size(D,2); H = size(D,1);
+II = getIntegralImage(D);
+
+Ver = zeros(W-3*border_size, 1);
+for x = 1:W-3*border_size
+    Ver(x) = getAvgDisparity(x, 1, x+3*border_size, H, II) - ...
+                
+end
+
+for y = 1:H-3*border_size
+    
+end
+
+function dd = getAvgDisparity(min_x, min_y, max_x, max_y, II)
+% function dd = getAvgDisparity(min_x, min_y, max_x, max_y, II)
+w = max_x - min_x + 1;
+h = max_y - min_y + 1;
+n_pix = w * h;
+sum_disparities = II(min_y, min_x) +  II(max_y, max_x) - II(min_y, max_x) - II(max_y, min_x);
+dd = sum_disparities / n_pix;

@@ -1,0 +1,7 @@
+sides
+
+Joris - van this week?
+
+
+s_left / right instead of radius for previous guess
+POLYOGN: vertical bars are vertical
