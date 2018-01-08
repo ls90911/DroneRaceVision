@@ -19,9 +19,9 @@ H = size(Response,1);
 xs = []; ys = []; ss = [];
 min_pixel_size = 100;
 min_fit = 0.45;
-graphics = false;
+graphics = true;
 if(graphics)
-    figure();
+    figure(2);
     imagesc(Response);
     hold on;
 end
@@ -38,8 +38,8 @@ for s = 1:MAX_SAMPLES
         y = (y_high + y_low) / 2;
         
         if(graphics)
-            if(sz < min_pixel_size) % || y_high < size(Response,1)/2)
-                plot([x, x], [y_low, y_high], 'Color', 'red');
+            if(sz < min_pixel_size)
+                plot([x, x], [y_low, y_high], 'Color', 'red','LineWidth', 5);
             else
                 plot([x, x], [y_low, y_high], 'Color', 'green', 'LineWidth', 5);
             end

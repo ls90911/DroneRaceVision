@@ -5,6 +5,8 @@ x_initial = round(x);
 
 y_low = round(y);
 done = false;
+
+% search downward
 while(y_low > 1 && ~done)
     % check x:
     x = max([x, 2]);

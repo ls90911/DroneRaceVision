@@ -5,6 +5,8 @@ function [x_low, x_high] = snake_left_and_right(x, y, Response)
 y_initial = y;
 x_low = x;
 done = false;
+
+% search left
 while(x_low > 1 && ~done)
     if(Response(y,x_low-1) > 0)
         x_low = x_low - 1;

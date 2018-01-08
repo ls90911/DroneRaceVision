@@ -35,11 +35,11 @@ for im = 1:n_images
         RGB = imresize(RGB, 0.25);
     end
         
-    if(graphics)
-        % show the image:
-        figure(); imshow(RGB);
-        title('RGB image');
-    end
+%     if(graphics)
+%         % show the image:
+%         figure(); imshow(RGB);
+%         title('RGB image');
+%     end
     
     % we filter in the hsv domain:
     FILTER_HSV = false;
@@ -59,31 +59,12 @@ for im = 1:n_images
         dy_min = 1; %0.05;
         %--------------------------------
         Response = filter_YCV(YCV, cr_min, dy_min);
-        figure();
-        subplot(1,2,1); imagesc(Response);
         dy_min = 0.05;
         Response = filter_YCV(YCV, cr_min, dy_min);
-        subplot(1,2,2); imagesc(Response);
-        
-    end
-    
-    
-    % response thresholding:
-    if(THRESHOLD)
-        std_factor = 2; % 1.5;
-        mR = mean(Response(:));
-        stdR = std(Response(:));
-        Response = (Response > mR + std_factor*stdR) .* Response;
-    end
-    
-    if(CUT_OFF_PROPELLORS)
-        % cut off propellors:
-        Response(:, 1:100) = 0;
-        Response(:, end-100:end) = 0;
     end
     
     if(graphics)
-        figure();
+        figure(1);
         imagesc(Response);
         hold on;
         title('Response Hue filter');
