@@ -24,6 +24,8 @@ for im = 1:n_images
     % read the image in RGB
     RGB = imread([dir_name '/' image_names{im}]);
     RGB = double(RGB) ./ 255;
+    % return 3 * matrix RGB(:,:,1) RGB(:,:,2) RGB(:,:,3)
+    % which are red green and blue respectively
     
     % potentially resize the image:
     if(strcmp(dir_name, 'images') || strcmp(dir_name, 'ventilator_images'))
@@ -50,8 +52,12 @@ for im = 1:n_images
     else
         % Probably Michael's code:
         YCV = rgb2ycbcr(RGB);
+        
+        %--------------------------------
+        % why?
         cr_min = 140.0 / 255.0;
         dy_min = 1; %0.05;
+        %--------------------------------
         Response = filter_YCV(YCV, cr_min, dy_min);
         figure();
         subplot(1,2,1); imagesc(Response);
@@ -241,8 +247,9 @@ for im = 1:n_images
         gates_in_image{im}.s = s(1);
     end
     if(graphics)
-        waitforbuttonpress;
-        %     close all;
+
+       % waitforbuttonpress;
+             close all;
     end
 end
 
