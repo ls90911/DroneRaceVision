@@ -63,12 +63,12 @@ for im = 1:n_images
         Response = filter_YCV(YCV, cr_min, dy_min);
     end
     
-    if(graphics)
-        figure(1);
-        imagesc(Response);
-        hold on;
-        title('Response Hue filter');
-    end
+%     if(graphics)
+%         figure(1);
+%         imagesc(Response);
+%         hold on;
+%         title('Response Hue filter');
+%     end
     
     
     if(SUB_SAMPLING_SNAKE)
@@ -92,6 +92,8 @@ for im = 1:n_images
             x = x(i); y = y(i); s = s(i);
             n_gates = length(x);
         end
+        
+        
         
         % NOT USED in Competition:
         
