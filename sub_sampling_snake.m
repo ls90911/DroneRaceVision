@@ -30,6 +30,10 @@ if(graphics)
     hold on;
 end
 
+figure(50)
+imagesc(Response);
+hold on;
+
 for s = 1:MAX_SAMPLES
     
     x = 1 + floor(rand(1)*(W-1));
@@ -93,3 +97,14 @@ end
 
 n_gates = length(xs);
 
+for i = 1:n_gates
+    Q1 =  [xs(i)-ss(i) ys(i)+ss(i)];
+    Q2 =  [xs(i)+ss(i) ys(i)+ss(i)];
+    Q3 =  [xs(i)+ss(i) ys(i)-ss(i)];
+    Q4 =  [xs(i)-ss(i) ys(i)-ss(i)];
+    figure(50)
+    plot([Q1(1) Q2(1)],[Q1(2) Q2(2)],'Color','r');
+    plot([Q2(1) Q3(1)],[Q2(2) Q3(2)],'Color','r');
+    plot([Q3(1) Q4(1)],[Q3(2) Q4(2)],'Color','r');
+    plot([Q4(1) Q1(1)],[Q4(2) Q1(2)],'Color','r');
+end

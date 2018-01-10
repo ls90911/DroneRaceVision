@@ -101,6 +101,9 @@ for im = 1:n_images
         for g = 1:n_gates
             
             % cut out a part of the Response map:
+            
+            % make the square in figure 50 a little bit larger
+            % only take color points to a matrix
             size_factor = 1.2;
             x_l = round(x(g) - s(g) * size_factor);
             x_h = round(x(g) + s(g) * size_factor);
@@ -111,6 +114,9 @@ for im = 1:n_images
             [points, weights] = convert_response_to_points(Response(y_l:y_h, x_l:x_h));
             
             % fit a window to it:
+            % there are too many points, in order to 
+            % increase the speed, just randomly select
+            % at most 500 points
             max_points = 500;
             if(size(points,1) > max_points)
                 inds = randperm(size(points,1));
